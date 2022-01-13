@@ -28,12 +28,13 @@ const categoriesRoutes = require('./routes/categories');
 const productsRoutes = require('./routes/products');
 const usersRoutes = require('./routes/users');
 const ordersRoutes = require('./routes/orders');
+const homeRoutes = require('./routes/index');
 
 app.use(`/categories`, categoriesRoutes);
 app.use(`/products`, productsRoutes);
 app.use(`/users`, usersRoutes);
 app.use(`/orders`, ordersRoutes);
-
+app.use("/", homeRoutes);
 //Database
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
