@@ -4,14 +4,18 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 // const authJwt = require('./helpers/auth-jwt');
 const errorHandler = require('./helpers/error-handler');
 
+//documentation
+const swaggerDocument = require('./swagger.json')
+const swaggerUi = require('swagger-ui-express')
+
 //parser
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
 //cors
 app.use(cors());
 app.options('*', cors())
@@ -24,6 +28,7 @@ app.use('/public/uploads', express.static(__dirname + '/public/uploads'));
 
 
 //Routes
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 const categoriesRoutes = require('./routes/categories');
 const productsRoutes = require('./routes/products');
 const usersRoutes = require('./routes/users');
