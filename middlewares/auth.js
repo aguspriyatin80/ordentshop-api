@@ -8,7 +8,7 @@ const authentication = (req, res, next)=>{
         req.user = payload
         next()
     } else {
-        throw new Error('error')
+        throw new Error('Unauthenticated')
     }
 }
 const authorization = (...roles) => (req,res,next)=> {
