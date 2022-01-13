@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://ordentshop-api.herokuapp.com"
+      "url": "https://ordentshop-api.herokuapp.com/api/v1"
     }
   ],
   "paths": {

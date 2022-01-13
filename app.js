@@ -35,10 +35,10 @@ const usersRoutes = require('./routes/users');
 const ordersRoutes = require('./routes/orders');
 const homeRoutes = require('./routes/index');
 
-app.use(`/categories`, categoriesRoutes);
-app.use(`/products`, productsRoutes);
-app.use(`/users`, usersRoutes);
-app.use(`/orders`, ordersRoutes);
+app.use(`/api/v1/categories`, categoriesRoutes);
+app.use(`/api/v1/products`, productsRoutes);
+app.use(`/api/v1/users`, usersRoutes);
+app.use(`/api/v1/orders`, ordersRoutes);
 app.use("/", homeRoutes);
 //Database
 mongoose.connect(process.env.CONNECTION_STRING, {
