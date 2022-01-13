@@ -105,7 +105,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/register', async (req, res, next) => {
     try {
-        const userExist = await User.find({ email: req.body.email }).countDocuments();
+        const userExist = await User.findOne({ email: req.body.email }).countDocuments();
         if (userExist == 0) {
             let user = new User({
                 name: req.body.name,

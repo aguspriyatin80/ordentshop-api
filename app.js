@@ -39,7 +39,7 @@ app.use(`/api/v1/categories`, categoriesRoutes);
 app.use(`/api/v1/products`, productsRoutes);
 app.use(`/api/v1/users`, usersRoutes);
 app.use(`/api/v1/orders`, ordersRoutes);
-app.use("/", homeRoutes);
+// app.use("/", homeRoutes);
 
 //Database
 mongoose.connect(process.env.CONNECTION_STRING, {
