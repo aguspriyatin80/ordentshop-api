@@ -9,7 +9,7 @@ require('dotenv/config');
 const errorHandler = require('./helpers/error-handler');
 
 //documentation
-const swaggerDocument = require('./swagger.json')
+const swaggerDocument = require('./documentation.json')
 const swaggerUi = require('swagger-ui-express')
 
 //parser
