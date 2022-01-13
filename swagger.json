@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "info": {
       "version": "1.0.0",
-      "title": "Profile User App API Documentation",
+      "title": "Ordentshop API Documentation",
       "description": "Developed by:",
       "license": {
         "name": "Agus Priyatin",
@@ -10,7 +10,7 @@
       }
     },
     "host": "https://ordentshop-api.herokuapp.com/",
-    "basePath": "/api/v1",
+    "basePath": "api/v1",
     "tags": [
       {
         "name": "Users",
