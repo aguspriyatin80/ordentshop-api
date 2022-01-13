@@ -40,9 +40,7 @@ app.use(`/api/v1/products`, productsRoutes);
 app.use(`/api/v1/users`, usersRoutes);
 app.use(`/api/v1/orders`, ordersRoutes);
 app.use("/", homeRoutes);
-app.use("*",(req,res)=>{
-    res.send('404: Invalid URL')
-})
+
 //Database
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
