@@ -24,8 +24,10 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         
-      const fileName = file.originalname.split(' ').join('-');
+    //   const fileName = file.originalname.split(' ').join('-');
+      const fileName = file.originalname.split('.')[0]
       const extension = FILE_TYPE_MAP[file.mimetype];
+            
       cb(null, `${fileName}-${Date.now()}.${extension}`)
     }
   })
@@ -69,7 +71,8 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) =>{
     if(!file) return res.status(400).send('No image in the request')
 
     const fileName = file.filename
-    const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+    // const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+    const basePath = `https://ordentshop-api.herokuapp.com/public/uploads/`;
     let product = new Product({
         name: req.body.name,
         description: req.body.description,
@@ -165,7 +168,8 @@ router.put(
          }
          const files = req.files
          let imagesPaths = [];
-         const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+        //  const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+         const basePath = `https://ordentshop-api.herokuapp.com/public/uploads/`;
 
          if(files) {
             files.map(file =>{
