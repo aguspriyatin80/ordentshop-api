@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
   
 const uploadOptions = multer({ storage: storage })
 
-router.get(`/`, authentication, authorization('customer','admin'), async (req, res,next) =>{
+router.get(`/`, async (req, res,next) =>{
     try{
         let filter = {};
         if(req.query.categories)
@@ -63,7 +63,7 @@ router.get(`/:id`, async (req, res) =>{
     res.send(product);
 })
 
-router.post(`/`, uploadOptions.single('image'), async (req, res) =>{
+router.post(`/`, authentication, authorization('customer','admin'), uploadOptions.single('image'), async (req, res) =>{
     const category = await Category.findById(req.body.category);
     if(!category) return res.status(400).send('Invalid Category')
 
@@ -95,7 +95,7 @@ router.post(`/`, uploadOptions.single('image'), async (req, res) =>{
     res.send(product);
 })
 
-router.put('/:id',async (req, res)=> {
+router.put('/:id', authentication, authorization('customer','admin'), async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id)) {
        return res.status(400).send('Invalid Product Id')
     }
@@ -126,7 +126,7 @@ router.put('/:id',async (req, res)=> {
     res.send(product);
 })
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', authentication, authorization('customer','admin'), (req, res)=>{
     Product.findByIdAndRemove(req.params.id).then(product =>{
         if(product) {
             return res.status(200).json({success: true, message: 'the product is deleted!'})
@@ -138,7 +138,7 @@ router.delete('/:id', (req, res)=>{
     })
 })
 
-router.get(`/get/count`, async (req, res) =>{
+router.get(`/get/count`, authentication, authorization('customer','admin'), async (req, res) =>{
     const productCount = await Product.countDocuments((count) => count)
 
     if(!productCount) {
@@ -149,7 +149,7 @@ router.get(`/get/count`, async (req, res) =>{
     });
 })
 
-router.get(`/get/featured/:count`, async (req, res) =>{
+router.get(`/get/featured/:count`, authorization('customer','admin'), async (req, res) =>{
     const count = req.params.count ? req.params.count : 0
     const products = await Product.find({isFeatured: true}).limit(+count);
 
@@ -160,7 +160,8 @@ router.get(`/get/featured/:count`, async (req, res) =>{
 })
 
 router.put(
-    '/gallery-images/:id', 
+    '/gallery-images/:id',
+    authorization('customer','admin'), 
     uploadOptions.array('images', 10), 
     async (req, res)=> {
         if(!mongoose.isValidObjectId(req.params.id)) {

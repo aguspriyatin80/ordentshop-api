@@ -2,8 +2,9 @@ const {Order} = require('../models/order');
 const express = require('express');
 const { OrderItem } = require('../models/order-item');
 const router = express.Router();
+const {authentication, authorization} = require('../middlewares/auth');
 
-router.get(`/`, async (req, res) =>{
+router.get(`/`, authentication, authorization('customer'), async (req, res) =>{
     const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
 
     if(!orderList) {
@@ -12,7 +13,7 @@ router.get(`/`, async (req, res) =>{
     res.send(orderList);
 })
 
-router.get(`/:id`, async (req, res) =>{
+router.get(`/:id`, authentication, authorization('customer'), async (req, res) =>{
     const order = await Order.findById(req.params.id)
     .populate('user', 'name')
     .populate({ 
@@ -26,7 +27,7 @@ router.get(`/:id`, async (req, res) =>{
     res.send(order);
 })
 
-router.post('/', async (req,res)=>{
+router.post('/', authentication, authorization('customer'), async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
             quantity: orderItem.quantity,
@@ -68,7 +69,7 @@ router.post('/', async (req,res)=>{
 })
 
 
-router.put('/:id',async (req, res)=> {
+router.put('/:id', authentication, authorization('customer'), async (req, res)=> {
     const order = await Order.findByIdAndUpdate(
         req.params.id,
         {
@@ -84,7 +85,7 @@ router.put('/:id',async (req, res)=> {
 })
 
 
-router.delete('/:id', (req, res)=>{
+router.delete('/:id', authentication, authorization('customer'), (req, res)=>{
     Order.findByIdAndRemove(req.params.id).then(async order =>{
         if(order) {
             await order.orderItems.map(async orderItem => {
@@ -99,7 +100,7 @@ router.delete('/:id', (req, res)=>{
     })
 })
 
-router.get('/get/totalsales', async (req, res)=> {
+router.get('/get/totalsales', authentication, authorization('manager','admin'), async (req, res)=> {
     const totalSales= await Order.aggregate([
         { $group: { _id: null , totalsales : { $sum : '$totalPrice'}}}
     ])
@@ -111,7 +112,7 @@ router.get('/get/totalsales', async (req, res)=> {
     res.send({totalsales: totalSales.pop().totalsales})
 })
 
-router.get(`/get/count`, async (req, res) =>{
+router.get(`/get/count`, authentication, authorization('customer','manager','admin'), async (req, res) =>{
     const orderCount = await Order.countDocuments((count) => count)
 
     if(!orderCount) {
@@ -122,7 +123,7 @@ router.get(`/get/count`, async (req, res) =>{
     });
 })
 
-router.get(`/get/userorders/:userid`, async (req, res) =>{
+router.get(`/get/userorders/:userid`, authentication, authorization('manager','customer'), async (req, res) =>{
     const userOrderList = await Order.find({user: req.params.userid}).populate({ 
         path: 'orderItems', populate: {
             path : 'product', populate: 'category'} 
