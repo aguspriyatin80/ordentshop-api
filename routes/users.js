@@ -76,35 +76,45 @@ router.put('/:id', async (req, res) => {
     res.send(user);
 })
 
-router.post('/login', async (req, res) => {
-    const user = await User.findOne({ email: req.body.email })
-    const secret = process.env.SECRET;
-    if (!user) {
-        return res.status(400).send('The user not found');
-    }
+router.post('/login', async (req, res,next) => {
+    try{    
+        const user = await User.findOne({ email: req.body.email })
+        const secret = process.env.SECRET;
+        // if (!user) {
+        //     return res.status(400).send({status:false,message:"Invalid email or password!"});
+        // }
 
-    if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
-        const token = jwt.sign(
-            {
-                userId: user.id,
-                role: user.role,
-                email: user.email
-            },
-            secret,
-            { expiresIn: '1d' }
-        )
-
-        res.status(200).send({ user: user.email, token })
-    } else {
-        res.status(400).send('password is wrong!');
+    
+        if (user && bcrypt.compareSync(req.body.password, user.passwordHash)) {
+            const token = jwt.sign(
+                {
+                    userId: user.id,
+                    role: user.role,
+                    email: user.email
+                },
+                secret,
+                { expiresIn: '1d' }
+            )
+                
+            res.status(200).send({ email: user.email, token })
+        } 
+        else {
+            // res.status(422).send({status:false, message:'Invalid email or password!'});            
+            throw new Error('invalid username or password')
+            
+        }
+    } catch(err){
+        next(err)
     }
+        
+    
 
 
 })
 
 
 router.post('/register', async (req, res, next) => {
-    try {
+    
         const userExist = await User.findOne({ email: req.body.email }).countDocuments();
         if (userExist == 0) {
             let user = new User({
@@ -120,18 +130,12 @@ router.post('/register', async (req, res, next) => {
                 country: req.body.country,
             })
             user = await user.save();
-
-            if (!user)
-                return res.status(400).send('the user cannot be created!')
-
-            res.send(user);
+            return res.send(user)                    
         } else {
-            // return res.status(400).send('the user already exist!')
-            throw new Error('user already exist')
+            return res.status(400).send({status:false,message:'user already exist'})            
+            // throw new Error('user already exist')
         }
-    } catch (err) {
-        next(err)
-    }
+   
 
 })
 

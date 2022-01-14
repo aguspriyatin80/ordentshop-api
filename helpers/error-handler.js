@@ -16,7 +16,11 @@
 // module.exports = errorHandler;
 
 module.exports = (err, req, res, next) => {
-    res.status(400).json({
+  if (err.message.includes('Illegal arguments')) {
+      //  validation error
+      return res.status(401).json({message: 'Illegal arguments'})
+  }  
+  res.status(400).json({
       status: false,
       message: err.message
     });
