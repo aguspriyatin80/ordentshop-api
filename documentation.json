@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://ordentshop-api.herokuapp.com/api/v1"
+      "url": "http://localhost:3000/api/v1"
     }
   ],
   "paths": {
@@ -58,7 +58,7 @@
         }
       }
     },
-    "/users/register": {
+    "/users/register": {      
       "post": {
         "tags": [
           "User and Authentication"
@@ -95,19 +95,21 @@
       }
     },
     "/products": {
+      "x-swagger-router-controller": "products",
       "post": {
         "tags": [
           "Products"
         ],
         "summary": "Create a new product",
         "description": "Creating for new product",
-        "operationId": "Product",
+        "operationId": "Product",       
         "requestBody": {
           "description": "Credentials to use",
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "$ref": "#/components/schemas/NewProduct"
+                
               }
             }
           },
