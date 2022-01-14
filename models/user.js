@@ -12,9 +12,8 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        validate:[validateEmail,'invalid email']
-        
-        
+        validate:[validateEmail,'invalid email']    
+                    
     },
     passwordHash: {
         type: String,        
