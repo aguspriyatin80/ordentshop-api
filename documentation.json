@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api/v1"
+      "url": "http://ordentshop-api.herokuapp.com/api/v1"
     }
   ],
   "paths": {
@@ -97,14 +97,12 @@
               }
             }
           },
-         
           "400": {
             "description": "Login failed"
           }
-         
         }
       }
-    }   
+    }
   },
   "components": {
     "schemas": {
@@ -116,7 +114,7 @@
           "password",
           "phone"
         ],
-        "properties": {         
+        "properties": {
           "email": {
             "type": "string"
           },
@@ -134,23 +132,21 @@
             "type": "string"
           },
           "street": {
-            "type": "string"            
+            "type": "string"
           },
           "apartment": {
-            "type": "string"            
+            "type": "string"
           },
           "zip": {
-            "type": "string"            
+            "type": "string"
           },
           "city": {
-            "type": "string"            
+            "type": "string"
           },
           "country": {
-            "type": "string"            
-          }        
-      }
-    
-     
+            "type": "string"
+          }
+        }
       },
       "LoginUser": {
         "type": "object",
@@ -166,9 +162,8 @@
             "type": "string",
             "format": "password"
           }
-        }           
+        }
       },
-     
       "LoginUserResponse": {
         "type": "object",
         "required": [
@@ -183,7 +178,6 @@
           }
         }
       },
-      
       "RegisterUser": {
         "type": "object",
         "required": [
@@ -223,7 +217,10 @@
           },
           "role": {
             "type": "string",
-            "enum": ["customer","admin"],
+            "enum": [
+              "customer",
+              "admin"
+            ],
             "default": "customer"
           }
         }
@@ -262,13 +259,11 @@
             "type": "string"
           },
           "role": {
-            "type": "string"                        
+            "type": "string"
           }
         }
       }
-
     },
-    
     "GenericErrorModel": {
       "type": "object",
       "required": [
