@@ -255,28 +255,7 @@
         }
       }
     },
-    "GenericErrorModel": {
-      "type": "object",
-      "required": [
-        "errors"
-      ],
-      "properties": {
-        "errors": {
-          "type": "object",
-          "required": [
-            "body"
-          ],
-          "properties": {
-            "body": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
+    
     "securitySchemes": {
       "Token": {
         "type": "apiKey",
