@@ -53,17 +53,8 @@
           },
           "400": {
             "description": "Login failed"
-          },
-          "422": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericErrorModel"
-                }
-              }
-            }
           }
+         
         }
       }
     },
