@@ -89,9 +89,50 @@
             }
           },
           "400": {
-            "description": "Login failed"
+            "description": "Registration failed"
           }
         }
+      }
+    },
+    "/products": {
+      "post": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Create a new product",
+        "description": "Creating for new product",
+        "operationId": "Product",
+        "requestBody": {
+          "description": "Credentials to use",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewProduct"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewProductResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Creating product failed"
+          }
+        },
+        "security": [
+          {
+            "Token": []
+          }
+        ]
       }
     }
   },
@@ -251,6 +292,113 @@
           },
           "role": {
             "type": "string"
+          }
+        }
+      },
+      "Products": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "countInStock"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "richDescription": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "brand": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "countInStock": {
+            "type": "number"
+          },
+          "rating": {
+            "type": "number",            
+            "default": 0
+          },
+          "numReviews": {
+            "type": "number",            
+            "default": 0
+          },
+          "isFeatured": {
+            "type": "boolean",            
+            "default": false
+          },
+          "dateCreated": {
+            "type": "string",            
+            "format": "date-time"
+          }
+        }
+      },
+      "NewProduct": {
+        "type": "object",
+        "required": [
+          "name",
+          "description",
+          "countInStock"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "richDescription": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "brand": {
+            "type": "string"
+          },
+          "price": {
+            "type": "number"
+          },
+          "category": {
+            "type": "string"
+          },
+          "countInStock": {
+            "type": "number"
+          }
+        }
+      },
+      "NewProductResponse": {
+        "type": "object",
+        "required": [
+          "product"
+        ],
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/NewProduct"
           }
         }
       }
