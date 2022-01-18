@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const {authentication, authorization} = require('../middlewares/auth');
 
-router.get(`/`, authentication, authorization('customer','admin','manager'), async (req, res,next) =>{
+router.get(`/`, async (req, res,next) =>{
 try{
     const categoryList = await Category.find();
 
@@ -16,7 +16,7 @@ try{
 }
 })
 
-router.get('/:id', authentication, authorization('customer','admin','manager'), async(req,res)=>{
+router.get('/:id', async(req,res)=>{
     const category = await Category.findById(req.params.id);
 
     if(!category) {
@@ -42,13 +42,12 @@ router.post('/', authentication, authorization('admin','manager'), async (req,re
 })
 
 
-router.put('/:id',authentication, authorization('admin','manager'), async (req, res)=> {
+router.put('/:id', authentication, authorization('admin','manager'), async (req, res)=> {
     const category = await Category.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
-            icon: req.body.icon || category.icon,
-            color: req.body.color,
+           
         },
         { new: true}
     )

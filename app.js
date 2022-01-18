@@ -4,12 +4,11 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv/config');
-// const bodyParser = require('body-parser')
-// const authJwt = require('./helpers/auth-jwt');
+
 const errorHandler = require('./helpers/error-handler');
 
 //documentation
-const swaggerDocument = require('./documentation.json')
+const swaggerDocument = require('./ordentshop-apidoc.json')
 const swaggerUi = require('swagger-ui-express')
 
 //parser
@@ -44,7 +43,9 @@ app.use("/", homeRoutes);
 //Database
 mongoose.connect(process.env.CONNECTION_STRING, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex:true
     // dbName: 'ordentshop-database'
 })
 .then(()=>{

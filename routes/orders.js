@@ -4,7 +4,7 @@ const { OrderItem } = require('../models/order-item');
 const router = express.Router();
 const {authentication, authorization} = require('../middlewares/auth');
 
-router.get(`/`, authentication, authorization('customer'), async (req, res) =>{
+router.get(`/`, authentication, authorization('admin','manager'), async (req, res) =>{
     const orderList = await Order.find().populate('user', 'name').sort({'dateOrdered': -1});
 
     if(!orderList) {
@@ -13,7 +13,7 @@ router.get(`/`, authentication, authorization('customer'), async (req, res) =>{
     res.send(orderList);
 })
 
-router.get(`/:id`, authentication, authorization('customer'), async (req, res) =>{
+router.get(`/:id`, authentication, authorization('admin','manager'), async (req, res) =>{
     const order = await Order.findById(req.params.id)
     .populate('user', 'name')
     .populate({ 
@@ -27,7 +27,7 @@ router.get(`/:id`, authentication, authorization('customer'), async (req, res) =
     res.send(order);
 })
 
-router.post('/', authentication, authorization('customer'), async (req,res)=>{
+router.post('/', authentication, async (req,res)=>{
     const orderItemsIds = Promise.all(req.body.orderItems.map(async (orderItem) =>{
         let newOrderItem = new OrderItem({
             quantity: orderItem.quantity,
@@ -46,7 +46,7 @@ router.post('/', authentication, authorization('customer'), async (req,res)=>{
         return totalPrice
     }))
 
-    const totalPrice = totalPrices.reduce((a,b) => a +b , 0);
+    const totalPrice = totalPrices.reduce((a,b) => a + b , 0);
 
     let order = new Order({
         orderItems: orderItemsIdsResolved,
@@ -100,7 +100,7 @@ router.delete('/:id', authentication, authorization('customer'), (req, res)=>{
     })
 })
 
-router.get('/get/totalsales', authentication, authorization('manager','admin'), async (req, res)=> {
+router.get('/get/totalsales', authentication, authorization("manager"), async (req, res)=> {
     const totalSales= await Order.aggregate([
         { $group: { _id: null , totalsales : { $sum : '$totalPrice'}}}
     ])
@@ -112,7 +112,7 @@ router.get('/get/totalsales', authentication, authorization('manager','admin'), 
     res.send({totalsales: totalSales.pop().totalsales})
 })
 
-router.get(`/get/count`, authentication, authorization('customer','manager','admin'), async (req, res) =>{
+router.get(`/get/count`, authentication, authorization('manager','admin'), async (req, res) =>{
     const orderCount = await Order.countDocuments((count) => count)
 
     if(!orderCount) {
@@ -134,7 +134,6 @@ router.get(`/get/userorders/:userid`, authentication, authorization('manager','c
     } 
     res.send(userOrderList);
 })
-
 
 
 module.exports =router;

@@ -1,0 +1,741 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "ORDENTSHOP-API",
+      "description": "API Documentation",
+      "contact": {
+        "name": "Ordentshop"
+      },
+      "license": {
+        "name": "Agus Priyatin",
+        "url": "https://aguspriyatin.wordpress.com/kontak"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "https://ordentshop-api.herokuapp.com/api/v1",
+        "variables": {}
+      }
+    ],
+    "paths": {
+      "/products": {
+        "get": {
+          "tags": [
+            "products"
+          ],
+          "summary": "products",
+          "operationId": "products",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "post": {
+          "tags": [
+            "products"
+          ],
+          "summary": "products",
+          "operationId": "Postproducts",
+          "parameters": [],
+          "requestBody": {
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "encoding": {},
+                "schema": {
+                  "required": [
+                    "name",
+                    "description",
+                    "category",
+                    "countInStock",
+                    "image"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Produk 1"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Description Produk 1"
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "61de4e50a88e0f0c84753a0d"
+                    },
+                    "countInStock": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 20
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/products/{productId}": {
+        "get": {
+          "tags": [
+            "products"
+          ],
+          "summary": "products",
+          "operationId": "Getproducts",
+          "parameters": [
+            {
+              "name": "productId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "put": {
+          "tags": [
+            "products"
+          ],
+          "summary": "products",
+          "operationId": "Putproducts",
+          "parameters": [
+            {
+              "name": "productId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "encoding": {},
+                "schema": {
+                  "required": [
+                    "name",
+                    "description",
+                    "category",
+                    "countInStock",
+                    "image"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "Produk 3"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Description Produk 3"
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "61de4e50a88e0f0c84753a0d"
+                    },
+                    "countInStock": {
+                      "type": "integer",
+                      "format": "int32",
+                      "example": 10
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        },
+        "delete": {
+          "tags": [
+            "products"
+          ],
+          "summary": "products1",
+          "operationId": "products1",
+          "parameters": [
+            {
+              "name": "productId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/categories": {
+        "get": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "categories",
+          "operationId": "categories",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "post": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "categories",
+          "operationId": "Postcategories",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/categoriesrequest"
+                },
+                "example": {
+                  "name": "fruits"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/categories/{categoryId}": {
+        "delete": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "categories",
+          "operationId": "Deletecategories",
+          "parameters": [
+            {
+              "name": "categoryId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/orders": {
+        "post": {
+          "tags": [
+            "orders"
+          ],
+          "summary": "orders",
+          "operationId": "orders",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ordersrequest"
+                },
+                "example": {
+                  "orderItems": [
+                    {
+                      "quantity": 2,
+                      "product": "61e1ca38b443ed166848d847"
+                    },
+                    {
+                      "quantity": 3,
+                      "product": "61e6db2430bc811d38159760"
+                    }
+                  ],
+                  "shippingAddress1": "Jl. Kapten Damsur No. 22",
+                  "shippingAddress2": "Kel. Kebonbaru, Kec. Kejaksan",
+                  "city": "Kota Cirebon",
+                  "zip": "45124",
+                  "country": "Indonesia",
+                  "phone": "081324672844",
+                  "user": "61e15787e6eb3013444d91a0"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        },
+        "get": {
+          "tags": [
+            "orders"
+          ],
+          "summary": "orders",
+          "operationId": "Getorders",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false,
+          "security": [
+            {
+              "bearer": []
+            }
+          ]
+        }
+      },
+      "/orders/{orderId}": {
+        "get": {
+          "tags": [
+            "orders"
+          ],
+          "summary": "orders",
+          "operationId": "Getorders1",
+          "parameters": [
+            {
+              "name": "orderId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/orders/get/totalsales": {
+        "get": {
+          "tags": [
+            "orders"
+          ],
+          "summary": "orders1",
+          "operationId": "orders1",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/orders/get/count": {
+        "get": {
+          "tags": [
+            "orders"
+          ],
+          "summary": "orders2",
+          "operationId": "orders2",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users": {
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "users",
+          "operationId": "users",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        },
+        "post": {
+          "tags": [
+            "users"
+          ],
+          "summary": "users1",
+          "operationId": "users1",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "users",
+          "operationId": "Getusers",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users/login": {
+        "post": {
+          "tags": [
+            "users"
+          ],
+          "summary": "login",
+          "operationId": "login",
+          "parameters": [],
+          "requestBody": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginrequest"
+                },
+                "example": {
+                  "email": "agus3@gmail.com",
+                  "password": "Agus1234"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users/register": {
+        "post": {
+          "tags": [
+            "users"
+          ],
+          "summary": "register",
+          "operationId": "register",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users/{userId}": {
+        "delete": {
+          "tags": [
+            "users"
+          ],
+          "summary": "users",
+          "operationId": "Deleteusers",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "description": "",
+              "required": true,
+              "style": "simple",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      },
+      "/users/get/count": {
+        "get": {
+          "tags": [
+            "users"
+          ],
+          "summary": "users2",
+          "operationId": "users2",
+          "parameters": [],
+          "responses": {
+            "200": {
+              "description": "",
+              "headers": {}
+            }
+          },
+          "deprecated": false
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "categoriesrequest": {
+          "title": "categoriesrequest",
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "name": "fruits"
+          }
+        },
+        "ordersrequest": {
+          "title": "ordersrequest",
+          "required": [
+            "orderItems",
+            "shippingAddress1",
+            "shippingAddress2",
+            "city",
+            "zip",
+            "country",
+            "phone",
+            "user"
+          ],
+          "type": "object",
+          "properties": {
+            "orderItems": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/OrderItem"
+              },
+              "description": ""
+            },
+            "shippingAddress1": {
+              "type": "string"
+            },
+            "shippingAddress2": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "zip": {
+              "type": "string"
+            },
+            "country": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "user": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "orderItems": [
+              {
+                "quantity": 2,
+                "product": "61e1ca38b443ed166848d847"
+              },
+              {
+                "quantity": 3,
+                "product": "61e6db2430bc811d38159760"
+              }
+            ],
+            "shippingAddress1": "Jl. Kapten Damsur No. 22",
+            "shippingAddress2": "Kel. Kebonbaru, Kec. Kejaksan",
+            "city": "Kota Cirebon",
+            "zip": "45124",
+            "country": "Indonesia",
+            "phone": "081324672844",
+            "user": "61e15787e6eb3013444d91a0"
+          }
+        },
+        "OrderItem": {
+          "title": "OrderItem",
+          "required": [
+            "quantity",
+            "product"
+          ],
+          "type": "object",
+          "properties": {
+            "quantity": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "product": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "quantity": 2,
+            "product": "61e1ca38b443ed166848d847"
+          }
+        },
+        "loginrequest": {
+          "title": "loginrequest",
+          "required": [
+            "email",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "example": {
+            "email": "agus3@gmail.com",
+            "password": "Agus1234"
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearer": {
+          "type": "https",
+          "scheme": "bearer"
+        }
+      }
+    },
+    "security": [],
+    "tags": [
+      {
+        "name": "products"
+      },
+      {
+        "name": "categories"
+      },
+      {
+        "name": "orders"
+      },
+      {
+        "name": "users"
+      }
+    ]
+  }

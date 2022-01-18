@@ -6,12 +6,6 @@ const categorySchema = mongoose.Schema({
         required: true,
         lowercase: true,
         trim: true
-    },
-    icon: {
-        type: String,
-    },
-    color: { 
-        type: String,
     }
 })
 

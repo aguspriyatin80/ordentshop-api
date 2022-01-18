@@ -63,12 +63,12 @@ router.get(`/:id`, async (req, res) =>{
     res.send(product);
 })
 
-router.post(`/`,  uploadOptions.single('image'), async (req, res) =>{
+router.post(`/`,  uploadOptions.single('image'), authentication, authorization("customer","admin"), async (req, res) =>{
     const category = await Category.findById(req.body.category);
     if(!category) return res.status(400).send('Invalid Category')
 
-    // const file = req.file;
-    const file = req.swagger.body.image
+    const file = req.file;
+    // const file = req.swagger.body.image
     if(!file) return res.status(400).send('No image in the request')
 
     const fileName = file.filename
@@ -96,20 +96,24 @@ router.post(`/`,  uploadOptions.single('image'), async (req, res) =>{
     res.send(product);
 })
 
-router.put('/:id', authentication, authorization('customer','admin'), async (req, res)=> {
+router.put('/:id', uploadOptions.single('image'), authentication, authorization('customer','admin'), async (req, res)=> {
     if(!mongoose.isValidObjectId(req.params.id)) {
        return res.status(400).send('Invalid Product Id')
     }
-    const category = await Category.findById(req.body.category);
-    if(!category) return res.status(400).send('Invalid Category')
 
+    const file = req.file;
+    if(!file) return res.status(400).send('No image in the request')
+
+    const fileName = file.filename
+    // const basePath = `${req.protocol}://${req.get('host')}/public/uploads/`;
+    const basePath = `https://ordentshop-api.herokuapp.com/public/uploads/`;
     const product = await Product.findByIdAndUpdate(
         req.params.id,
         {
             name: req.body.name,
             description: req.body.description,
             richDescription: req.body.richDescription,
-            image: req.body.image,
+            image: `${basePath}${fileName}`,// "http://localhost:4000/public/upload/image-2323232"
             brand: req.body.brand,
             price: req.body.price,
             category: req.body.category,
@@ -121,13 +125,16 @@ router.put('/:id', authentication, authorization('customer','admin'), async (req
         { new: true}
     )
 
+    const category = await Category.findById(req.body.category);   
+    if(!category) return res.status(400).send('Invalid Category')
+
     if(!product)
     return res.status(500).send('the product cannot be updated!')
 
     res.send(product);
 })
 
-router.delete('/:id', authentication, authorization('customer','admin'), (req, res)=>{
+router.delete('/:id', authentication, authorization('manager','admin'), (req, res)=>{
     Product.findByIdAndRemove(req.params.id).then(product =>{
         if(product) {
             return res.status(200).json({success: true, message: 'the product is deleted!'})
@@ -139,7 +146,7 @@ router.delete('/:id', authentication, authorization('customer','admin'), (req, r
     })
 })
 
-router.get(`/get/count`, authentication, authorization('customer','admin'), async (req, res) =>{
+router.get(`/get/count`, authentication, authorization('manager','admin'), async (req, res) =>{
     const productCount = await Product.countDocuments((count) => count)
 
     if(!productCount) {
@@ -150,7 +157,7 @@ router.get(`/get/count`, authentication, authorization('customer','admin'), asyn
     });
 })
 
-router.get(`/get/featured/:count`, authorization('customer','admin'), async (req, res) =>{
+router.get(`/get/featured/:count`, authentication, authorization('customer','admin'), async (req, res) =>{
     const count = req.params.count ? req.params.count : 0
     const products = await Product.find({isFeatured: true}).limit(+count);
 
@@ -162,6 +169,7 @@ router.get(`/get/featured/:count`, authorization('customer','admin'), async (req
 
 router.put(
     '/gallery-images/:id',
+    authentication,
     authorization('customer','admin'), 
     uploadOptions.array('images', 10), 
     async (req, res)=> {
