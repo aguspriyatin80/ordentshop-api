@@ -24,7 +24,7 @@
           "tags": [
             "products"
           ],
-          "summary": "products",
+          "summary": "Get all products",
           "operationId": "products",
           "parameters": [],
           "responses": {
@@ -39,7 +39,7 @@
           "tags": [
             "products"
           ],
-          "summary": "products",
+          "summary": "Create new product",
           "operationId": "Postproducts",
           "parameters": [],
           "requestBody": {
@@ -101,7 +101,7 @@
           "tags": [
             "products"
           ],
-          "summary": "products",
+          "summary": "Get product by Id",
           "operationId": "Getproducts",
           "parameters": [
             {
@@ -127,7 +127,7 @@
           "tags": [
             "products"
           ],
-          "summary": "products",
+          "summary": "Edit a product",
           "operationId": "Putproducts",
           "parameters": [
             {
@@ -198,7 +198,7 @@
           "tags": [
             "products"
           ],
-          "summary": "products1",
+          "summary": "Delete a product",
           "operationId": "products1",
           "parameters": [
             {
@@ -231,7 +231,7 @@
           "tags": [
             "categories"
           ],
-          "summary": "categories",
+          "summary": "Get all categories",
           "operationId": "categories",
           "parameters": [],
           "responses": {
@@ -246,7 +246,7 @@
           "tags": [
             "categories"
           ],
-          "summary": "categories",
+          "summary": "Create new category",
           "operationId": "Postcategories",
           "parameters": [],
           "requestBody": {
@@ -282,7 +282,7 @@
           "tags": [
             "categories"
           ],
-          "summary": "categories",
+          "summary": "Delete a category",
           "operationId": "Deletecategories",
           "parameters": [
             {
@@ -310,7 +310,7 @@
           "tags": [
             "orders"
           ],
-          "summary": "orders",
+          "summary": "Create new order",
           "operationId": "orders",
           "parameters": [],
           "requestBody": {
@@ -360,7 +360,7 @@
           "tags": [
             "orders"
           ],
-          "summary": "orders",
+          "summary": "Get all orders",
           "operationId": "Getorders",
           "parameters": [],
           "responses": {
@@ -382,7 +382,7 @@
           "tags": [
             "orders"
           ],
-          "summary": "orders",
+          "summary": "Get order by Id",
           "operationId": "Getorders1",
           "parameters": [
             {
@@ -410,7 +410,7 @@
           "tags": [
             "orders"
           ],
-          "summary": "orders1",
+          "summary": "Get total sales",
           "operationId": "orders1",
           "parameters": [],
           "responses": {
@@ -427,7 +427,7 @@
           "tags": [
             "orders"
           ],
-          "summary": "orders2",
+          "summary": "Count orders",
           "operationId": "orders2",
           "parameters": [],
           "responses": {
@@ -444,7 +444,7 @@
           "tags": [
             "users"
           ],
-          "summary": "users",
+          "summary": "Get all users",
           "operationId": "users",
           "parameters": [],
           "responses": {
@@ -476,7 +476,7 @@
           "tags": [
             "users"
           ],
-          "summary": "users",
+          "summary": "Get user by Id",
           "operationId": "Getusers",
           "parameters": [
             {
@@ -504,7 +504,7 @@
           "tags": [
             "users"
           ],
-          "summary": "login",
+          "summary": "login for registered user",
           "operationId": "login",
           "parameters": [],
           "requestBody": {
@@ -536,7 +536,7 @@
           "tags": [
             "users"
           ],
-          "summary": "register",
+          "summary": "register new user",
           "operationId": "register",
           "parameters": [],
           "responses": {
@@ -553,7 +553,7 @@
           "tags": [
             "users"
           ],
-          "summary": "users",
+          "summary": "Delete user",
           "operationId": "Deleteusers",
           "parameters": [
             {
@@ -581,7 +581,7 @@
           "tags": [
             "users"
           ],
-          "summary": "users2",
+          "summary": "Count users",
           "operationId": "users2",
           "parameters": [],
           "responses": {
