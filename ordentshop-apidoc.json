@@ -2,7 +2,15 @@
   "openapi": "3.0.0",
   "info": {
     "title": "ORDENTSHOP-API",
-    "contact": {},
+
+    "description": "API Documentation",
+    "contact": {
+      "name": "Agus Priyatin"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://aguspriyatin.wordpress.com/kontak"
+    },
     "version": "1.0"
   },
   "servers": [
