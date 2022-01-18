@@ -459,7 +459,7 @@
           "tags": [
             "users"
           ],
-          "summary": "users1",
+          "summary": "Create a new user",
           "operationId": "users1",
           "parameters": [],
           "responses": {
@@ -504,7 +504,7 @@
           "tags": [
             "users"
           ],
-          "summary": "login for registered user",
+          "summary": "Login for registered user",
           "operationId": "login",
           "parameters": [],
           "requestBody": {
@@ -536,7 +536,7 @@
           "tags": [
             "users"
           ],
-          "summary": "register new user",
+          "summary": "Register new user",
           "operationId": "register",
           "parameters": [],
           "responses": {
