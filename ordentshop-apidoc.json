@@ -75,7 +75,8 @@
                     "example": 20
                   },
                   "image": {
-                    "type": "string"
+                    "type": "string",
+                    "file":"binary"
                   }
                 }
               }
