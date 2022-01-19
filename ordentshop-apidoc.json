@@ -76,7 +76,7 @@
                   },
                   "image": {
                     "type": "string",
-                    "file":"binary"
+                    "format":"binary"
                   }
                 }
               }
